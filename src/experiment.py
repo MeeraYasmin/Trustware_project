@@ -3,7 +3,7 @@ CLI experiment runner.
 
 Usage
 -----
-    export ANTHROPIC_API_KEY=sk-ant-...
+    export OPENAI_API_KEY=sk-...
     python src/experiment.py
 
 Options
@@ -12,7 +12,7 @@ Options
     --mutations  all | original,random,demo_neutral,...  (default: all)
     --output     path to JSON results file  (default: results/results.json)
     --delay      seconds between API calls  (default: 0.3)
-    --model      Anthropic model name       (default: claude-sonnet-4-6)
+    --model      OpenAI model name          (default: gpt-4o)
 
 Example
 -------
@@ -29,7 +29,7 @@ from pathlib import Path
 # allow running from repo root or src/
 sys.path.insert(0, str(Path(__file__).parent))
 
-import anthropic
+from openai import OpenAI
 
 from programs import PROGRAMS
 from mutations import apply_all_mutations, mutation_label, ALL_MUTATION_NAMES
@@ -53,17 +53,19 @@ def build_prompt(code: str, inp: str, desc: str) -> str:
     )
 
 
-def query_llm(client: anthropic.Anthropic, code: str, inp: str, desc: str,
+def query_llm(client: OpenAI, code: str, inp: str, desc: str,
               model: str) -> str:
     prompt = build_prompt(code, inp, desc)
     try:
-        response = client.messages.create(
+        response = client.chat.completions.create(
             model=model,
             max_tokens=100,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        return response.content[0].text.strip()
+        return response.choices[0].message.content.strip()
     except Exception as exc:
         return f"API_ERROR:{exc}"
 
@@ -73,9 +75,9 @@ def run_experiment(
     mutations=None,
     output_path="results/results.json",
     delay=0.3,
-    model="claude-sonnet-4-6",
+    model="gpt-4o",
 ):
-    client = anthropic.Anthropic()
+    client = OpenAI()
 
     selected_programs = programs or [p["id"] for p in PROGRAMS]
     selected_mutations = mutations or ALL_MUTATION_NAMES
@@ -194,11 +196,11 @@ def main():
     parser.add_argument("--output", default="results/results.json")
     parser.add_argument("--delay", type=float, default=0.3,
                         help="seconds between API calls")
-    parser.add_argument("--model", default="claude-sonnet-4-6")
+    parser.add_argument("--model", default="gpt-4o")
     args = parser.parse_args()
 
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("Error: ANTHROPIC_API_KEY environment variable not set.")
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Error: OPENAI_API_KEY environment variable not set.")
         sys.exit(1)
 
     programs = None if args.programs == "all" else args.programs.split(",")
