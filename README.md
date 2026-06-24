@@ -15,7 +15,7 @@ MUCOCO shows lexical mutations (random renaming) produce the highest inconsisten
 ## What's in this repo
 
 ```
-mucoco-hinter-demo/
+Trustware-project/
 ├── README.md
 ├── requirements.txt
 ├── demo/
