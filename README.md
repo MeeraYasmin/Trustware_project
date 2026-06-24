@@ -27,7 +27,7 @@ Trustware-project/
 │   └── experiment.py        # Full experiment runner (CLI)
 ├── results/
 │   └── .gitkeep
-└── tests/
+└── test/
     └── test_mutations.py
 ```
 
