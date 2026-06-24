@@ -39,8 +39,8 @@ Open `demo/index.html` in any browser. Calls the Anthropic API directly from the
 ### CLI experiment runner
 ```bash
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=your_key_here
-python src/experiment.py --programs all --mutations all --output results/results.json
+export OPENAI_API_KEY=your_key_here
+python src/experiment.py --programs all --mutations all
 ```
 
 ### Run tests
