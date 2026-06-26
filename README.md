@@ -22,7 +22,7 @@ Trustware-project/
 │   ├── oracle.py            # Correctness, consistency, and demographic inconsistency oracles
 │   └── experiment.py        # Full experiment runner (CLI)
 ├── results/
-│   └── .gitkeep
+│   └── .results.json
 └── test/
     └── test_mutations.py
 ```
