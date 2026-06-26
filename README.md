@@ -63,7 +63,4 @@ python -m pytest tests/
 
 - Chua et al. (2026). MUCOCO: Automated Consistency Testing of Code LLMs. arXiv:2604.19086
 - Souani et al. (2025). HInter: Exposing Hidden Intersectional Bias in LLMs. arXiv:2503.11962
-- Honarvar et al. (2025). TURBULENCE. ICST 2025.
-- Rajan et al. (2024). KonTest. Findings of EMNLP 2024.
-- Sap et al. (2020). Social Bias Frames. ACL 2020.
 - Gu et al. (2024). CruxEval. ICML 2024.
