@@ -34,7 +34,7 @@ Trustware-project/
 ## Quick start
 
 ### Browser demo (no Python required)
-Open `demo/index.html` in any browser. Calls the Anthropic API directly from the browser. You need an Anthropic API key.
+Open `demo/index.html` in any browser. Calls the OpenAI API directly from the browser. You need an OpenAI API key.
 
 ### CLI experiment runner
 ```bash
