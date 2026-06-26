@@ -45,7 +45,7 @@ python src/experiment.py --programs all --mutations all
 
 ### Run tests
 ```bash
-python -m pytest tests/
+python -m pytest test/
 ```
 
 ## Mutation operators
